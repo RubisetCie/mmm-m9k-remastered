@@ -437,7 +437,7 @@ if CLIENT then
 
 
 		if eWep.ScopeStage ~= eWep.ScoeStageLast then -- Required to fix a bug when switching ViewEntities.
-			eWep.Owner:EmitSound("weapons/zoom.wav",70)
+			eWep.Owner:EmitSound("weapons/zoom.wav",70,100,1,CHAN_WEAPON)
 		end
 
 
@@ -485,7 +485,7 @@ if CLIENT then
 					if iPassed > v.iDelay then
 
 
-						eWep.Owner:EmitSound(v.sSound,eWep.iVolume or 70,math.random(95,105),1,CHAN_ITEM) -- Random pitch = Better
+						eWep.Owner:EmitSound(v.sSound,eWep.iVolume or 70,math.random(95,105),1,CHAN_WEAPON) -- Random pitch = Better
 
 
 						tPlayed[k] = true

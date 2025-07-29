@@ -219,6 +219,8 @@ local ConVar_SpawnReserve = CreateConVar("m9k_spawn_with_reserve","1",FCVAR_ARCH
 local sTag = "MMM_M9kr_Weapons"
 local sTagFix = sTag .. "_FixMat" -- Used in this file and meteors_grenade_base_model.lua
 
+local IsValid = IsValid
+local CurTime = CurTime
 
 local fSetOnetimeVars = function()
 
@@ -516,7 +518,7 @@ if SERVER then
 
 
 		if self.Owner:WaterLevel() == 3 and not self.CanFireUnderwater then -- Cannot fire underwater
-			self.Owner:EmitSound("weapons/masadamagpul/safety.mp3")
+			self.Owner:EmitSound("weapons/masadamagpul/safety.mp3",75,100,1,CHAN_WEAPON)
 
 			self:SetNextPrimaryFire(CurTime() + 0.5)
 
@@ -715,7 +717,7 @@ if SERVER then
 		-- Out of ammo!
 
 		if self:GetNextPrimaryFire() < CurTime() and self.Owner:GetAmmoCount(self.Primary.Ammo) <= 0 then
-			self.Owner:EmitSound("weapons/masadamagpul/safety.mp3")
+			self.Owner:EmitSound("weapons/masadamagpul/safety.mp3",75,100,1,CHAN_WEAPON)
 
 			self:SetNextPrimaryFire(CurTime() + 0.5)
 		end
@@ -928,7 +930,7 @@ if CLIENT then
 				if not eWep.tDrawSoundSequence then
 
 					util.PrecacheSound(eWep.DrawSound) -- Fixes one-time issues
-					eWep.Owner:EmitSound(eWep.DrawSound,65)
+					eWep.Owner:EmitSound(eWep.DrawSound,65,100,1,CHAN_WEAPON)
 
 				else
 
@@ -961,7 +963,7 @@ if CLIENT then
 
 
 									util.PrecacheSound(v.sSound) -- Fixes one-time issues
-									eWep.Owner:EmitSound(v.sSound,v.iVolume or 70,math.random(95,105),1,CHAN_ITEM) -- Random pitch = Better
+									eWep.Owner:EmitSound(v.sSound,v.iVolume or 70,math.random(95,105),1,CHAN_WEAPON) -- Random pitch = Better
 
 
 									tPlayed[k] = true
@@ -1253,10 +1255,11 @@ if CLIENT then
 
 
 	function SWEP:PrimaryShootEffects(bBool)
-		if (not bBool and self.Owner == LocalPlayer()) then return end -- It already played for them!
+
+		if (not bBool and self.Owner ~= LocalPlayer()) then return end -- It already played for them!
 
 
-		self:EmitSound(self.Primary.Sound,self.Primary.SoundVolume or 75,math.random(95,105))
+		self:EmitSound(self.Primary.Sound,self.Primary.SoundVolume or 75,math.random(95,105),1,CHAN_WEAPON)
 
 
 		-- Third person effects / Multiplayer effects
@@ -1430,7 +1433,7 @@ if CLIENT then
 						if iPassed > v.iDelay then
 
 							util.PrecacheSound(v.sSound) -- Fixes one-time issues
-							self.Owner:EmitSound(v.sSound,v.iVolume or 70,math.random(95,105),1,CHAN_ITEM) -- Random pitch = Better
+							self.Owner:EmitSound(v.sSound,v.iVolume or 70,math.random(95,105),1,CHAN_WEAPON) -- Random pitch = Better
 
 
 							tPlayed[k] = true

@@ -649,12 +649,12 @@ if CLIENT then
 		local iEvent = net.ReadInt(6)
 
 		if iEvent == 1 and eWep.DrawSound then -- Deploy sound!
-			eWep:EmitSound(eWep.DrawSound,65)
+			eWep:EmitSound(eWep.DrawSound,65,100,1,CHAN_WEAPON)
 		elseif iEvent == 2 then -- Weapon was dropped!
 			eWep:ResetInternalVars()
 		elseif iEvent == 3 then -- Pull-pin
 			if IsValid(eWep.Owner) and (eWep.Owner ~= LocalPlayer() or eWep.Owner:GetViewEntity() ~= eWep.Owner) then
-				eWep.Owner:EmitSound(eWep.PinPullSound or "weapons/pinpull.wav",eWep.PinPullSoundVolume or 70,100,1,CHAN_ITEM)
+				eWep.Owner:EmitSound(eWep.PinPullSound or "weapons/pinpull.wav",eWep.PinPullSoundVolume or 70,100,1,CHAN_WEAPON)
 			end
 
 			if eWep.PinPullEvent then
@@ -665,7 +665,7 @@ if CLIENT then
 				eWep.Owner:SetAnimation(PLAYER_ATTACK1)
 
 				if eWep.ThrowSound then
-					eWep.Owner:EmitSound(eWep.ThrowSound,eWep.ThrowSoundVolume or 70,100,1,CHAN_ITEM)
+					eWep.Owner:EmitSound(eWep.ThrowSound,eWep.ThrowSoundVolume or 70,100,1,CHAN_WEAPON)
 				end
 			end
 

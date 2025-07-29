@@ -51,7 +51,7 @@ if SERVER then
 
 			self.Owner:DoAnimationEvent(ACT_HL2MP_GESTURE_RANGE_ATTACK_MELEE)
 			self.Owner:ViewPunch(vPunch)
-			self.Owner:EmitSound("weapons/iceaxe/iceaxe_swing1.wav")
+			self.Owner:EmitSound("weapons/iceaxe/iceaxe_swing1.wav",75,100,1,CHAN_WEAPON)
 
 
 			timer.Simple(0.15,function()

@@ -128,7 +128,7 @@ if SERVER then
 		self:SetNextPrimaryFire(self.iReloadTime)
 
 
-		self.Owner:EmitSound("weapons/mmm/flaregun-reload1.mp3",65)
+		self.Owner:EmitSound("weapons/mmm/flaregun-reload1.mp3",65,100,1,CHAN_WEAPON)
 
 
 		return true

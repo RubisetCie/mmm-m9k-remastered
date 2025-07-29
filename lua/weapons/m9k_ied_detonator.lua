@@ -89,7 +89,7 @@ if SERVER then
 		self:SetNextPrimaryFire(CurTime() + 0.25)
 
 
-		self.Owner:EmitSound("buttons/button14.wav")
+		self.Owner:EmitSound("buttons/button14.wav",75,100,1,CHAN_WEAPON)
 
 
 		self:SendWeaponAnim(ACT_SLAM_THROW_DETONATE)

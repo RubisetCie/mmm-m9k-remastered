@@ -74,6 +74,9 @@ SWEP.ShouldDoMoveSpread = false
 
 local sTag = "MMM_M9kr_Weapons_Shotguns"
 
+local IsValid = IsValid
+local CurTime = CurTime
+
 -- ----- ----- ----- ----- ------- ----- ----- ----- ----- -----
 -- SERVER
 -- ----- ----- ----- ----- ------- ----- ----- ----- ----- -----
@@ -90,7 +93,6 @@ if SERVER then
 
 	local fSetDelay = function(self) -- Let's not have the same code like 10 times, alright?
 		if not IsValid(self.Owner) then return end
-
 
 		local vm = self.Owner:GetViewModel()
 
@@ -273,7 +275,7 @@ if CLIENT then
 			eWep.bBlockIronSights = true
 
 			if bIsValidOwner and bShouldHear and eWep.ReloadSoundStart then
-				eWep.Owner:EmitSound(eWep.ReloadSoundStart,eWep.ReloadSoundStartVolume or 70,100,1,CHAN_ITEM)
+				eWep.Owner:EmitSound(eWep.ReloadSoundStart,eWep.ReloadSoundStartVolume or 70,100,1,CHAN_WEAPON)
 			end
 
 		elseif iEvent == 2 then
@@ -281,13 +283,13 @@ if CLIENT then
 			if bIsValidOwner and bShouldHear and eWep.ReloadSound then
 				eWep.Owner:SetAnimation(PLAYER_RELOAD)
 
-				eWep.Owner:EmitSound(eWep.ReloadSound,eWep.ReloadSoundVolume or 70,100,1,CHAN_ITEM)
+				eWep.Owner:EmitSound(eWep.ReloadSound,eWep.ReloadSoundVolume or 70,100,1,CHAN_WEAPON)
 			end
 
 		elseif iEvent == 3 then
 
 			if bIsValidOwner and bShouldHear and eWep.ReloadSoundFinish then
-				eWep.Owner:EmitSound(eWep.ReloadSoundFinish,eWep.ReloadSoundFinishVolume or 70,100,1,CHAN_ITEM)
+				eWep.Owner:EmitSound(eWep.ReloadSoundFinish,eWep.ReloadSoundFinishVolume or 70,100,1,CHAN_WEAPON)
 			end
 
 			eWep:SetHoldType(eWep.HoldType)
@@ -319,7 +321,7 @@ if CLIENT then
 			self.NextPumpSound = nil
 
 			if IsValid(self.Owner) then
-				self.Owner:EmitSound(self.Primary.SoundPump,75,100,1,CHAN_ITEM)
+				self.Owner:EmitSound(self.Primary.SoundPump,75,100,1,CHAN_WEAPON)
 			end
 		end
 	end

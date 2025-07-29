@@ -67,7 +67,7 @@ if SERVER then
 
 
 			if tTrace.HitSky then
-				self.Owner:EmitSound("player/suit_denydevice.wav")
+				self.Owner:EmitSound("player/suit_denydevice.wav",75,100,1,CHAN_WEAPON)
 				self:SetNextPrimaryFire(CurTime() + 0.5)
 
 				return
@@ -83,7 +83,7 @@ if SERVER then
 
 
 			if not tSkyCheck.HitSky then
-				self.Owner:EmitSound("player/suit_denydevice.wav")
+				self.Owner:EmitSound("player/suit_denydevice.wav",75,100,1,CHAN_WEAPON)
 				self:SetNextPrimaryFire(CurTime() + 0.5)
 
 				return
@@ -125,7 +125,7 @@ if SERVER then
 
 
 				if not tSkyCheck2.HitSky then
-					self.Owner:EmitSound("player/suit_denydevice.wav")
+					self.Owner:EmitSound("player/suit_denydevice.wav",75,100,1,CHAN_WEAPON)
 					self:SetNextPrimaryFire(CurTime() + 0.5)
 
 					return
@@ -151,7 +151,7 @@ if SERVER then
 			end
 
 
-			self.Owner:EmitSound(self.Primary.Sound)
+			self.Owner:EmitSound(self.Primary.Sound,75,100,1,CHAN_WEAPON)
 
 			self:SetNextPrimaryFire(CurTime() + 15)
 

@@ -79,6 +79,6 @@ function SWEP:SecondaryAttack() -- Secondary should make you fire both barrels. 
 		self:SetNextPrimaryFire(CurTime())
 		self:PrimaryAttack()
 
-		self:EmitSound("weapons/dbarrel/dblast.wav",85)
+		self:EmitSound("weapons/dbarrel/dblast.wav",85,100,1,CHAN_WEAPON)
 	end
 end
