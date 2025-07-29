@@ -157,10 +157,6 @@ if SERVER then
 
 
 		if self.ReloadInstantly then -- Refund ammo
-			self.Owner:GiveAmmo(self:Clip1(),self.Primary.Ammo,true)
-
-			self:SetClip1(0)
-
 			fNetEvent(self,2) -- Network reload animation
 		end
 

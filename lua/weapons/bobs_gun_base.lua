@@ -626,7 +626,7 @@ if SERVER then
 		if not IsFirstTimePredicted() or not self._CanReload then return end
 
 
-		if self.Owner:GetAmmoCount(self.Primary.Ammo) >= 1 or self:Clip1() >= 1 then
+		if self.Owner:GetAmmoCount(self.Primary.Ammo) >= 1 and self:Clip1() < self.Primary.ClipSize then
 
 
 			-- Reset ironsights
@@ -645,12 +645,6 @@ if SERVER then
 					return
 				end
 			end
-
-
-			-- Put remaining mag in player inventory
-			self.Owner:GiveAmmo(self:Clip1(),self.Primary.Ammo,true)
-
-			self:SetClip1(0)
 
 
 			self.Owner:SetAnimation(PLAYER_RELOAD)
@@ -788,13 +782,13 @@ if SERVER then
 
 			-- Finish reloading
 
-			local iAmount = self.Primary.ClipSize
+			local iDiff = self.Primary.ClipSize - self:Clip1()
 			local sType = self.Primary.Ammo
 
 
-			self:SetClip1(self.Owner:GetAmmoCount(sType) >= iAmount and iAmount or self.Owner:GetAmmoCount(sType))
+			self:SetClip1(self.Owner:GetAmmoCount(sType) >= iDiff and self.Primary.ClipSize or self:Clip1() + self.Owner:GetAmmoCount(sType))
 
-			self.Owner:SetAmmo(self.Owner:GetAmmoCount(sType) - iAmount,sType)
+			self.Owner:SetAmmo(self.Owner:GetAmmoCount(sType) - iDiff,sType)
 
 
 			self._CanReload = true
@@ -1330,7 +1324,7 @@ if CLIENT then
 	function SWEP:Reload(bNet) -- Reloading is handled by the server unless there is no dynamic reload defined
 
 		if not self.tReloadDynamic then
-			if self.Owner:GetAmmoCount(self.Primary.Ammo) >= 1 or self:Clip1() >= 1 then
+			if self.Owner:GetAmmoCount(self.Primary.Ammo) >= 1 and self:Clip1() < self.Primary.ClipSize then
 
 
 				-- Reset ironsights
