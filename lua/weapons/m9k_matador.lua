@@ -211,3 +211,7 @@ end
 function SWEP:Reload() -- Reloading? Pft. That's for losers!
 	return true
 end
+
+
+function SWEP:DoDrawCrosshair()
+end

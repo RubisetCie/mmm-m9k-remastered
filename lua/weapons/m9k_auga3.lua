@@ -66,3 +66,6 @@ SWEP.LegacyBalance = {
 		Spread = .025
 	}
 }
+
+function SWEP:DoDrawCrosshair()
+end
