@@ -1,5 +1,12 @@
 name: Create GMA
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      version_tag:
+        type: string
+        description: Version tag
+        default: '1.0'
+        required: true
 
 jobs:
   build:
@@ -22,11 +29,20 @@ jobs:
       - name: Creating GMA
         run: |
           ../gmad/gmad_linux create -folder . -out mmm-m9k-remastered.gma
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+          zip -9 mmm-m9k-remastered.zip mmm-m9k-remastered.gma
+      - name: Publish Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: mmm-m9k-remastered
-          path: mmm-m9k-remastered.gma
-          overwrite: true
-          compression-level: 9
-          if-no-files-found: error
+          name: Release ${{github.event.inputs.version_tag}}
+          tag_name: ${{github.event.inputs.version_tag}}
+          prerelease: false
+          draft: true
+          files: mmm-m9k-remastered.zip
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: mmm-m9k-remastered
+#          path: mmm-m9k-remastered.gma
+#          overwrite: true
+#          compression-level: 9
+#          if-no-files-found: error
