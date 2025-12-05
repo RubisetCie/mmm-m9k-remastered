@@ -241,4 +241,7 @@ if CLIENT then
 			self.WorldEnt:Remove()
 		end
 	end
+
+	function SWEP:DoDrawCrosshair()
+	end
 end

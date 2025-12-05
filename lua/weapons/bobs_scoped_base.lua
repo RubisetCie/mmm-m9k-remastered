@@ -645,6 +645,11 @@ if CLIENT then
 			return true
 		end
 	end
+
+
+	function SWEP:DoDrawCrosshair()
+		return true
+	end
 end
 
 -- ----- ----- ----- ----- ------- ----- ----- ----- ----- -----
